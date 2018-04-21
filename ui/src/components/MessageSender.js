@@ -28,7 +28,7 @@ const MessageSender = ({ user, ...props }) =>
         }}
         render={({ errors, isSubmitting, status }) =>
             <Form>
-                <h2>Say a nice thing to...</h2>
+                <h2>Say something nice to...</h2>
                 <div className="ui card centered">
                     {
                         user.photo && <div className="image">
