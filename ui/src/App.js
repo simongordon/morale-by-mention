@@ -6,6 +6,7 @@ import 'semantic-ui-css/components/grid.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/segment.css'
 import {getRandomUser} from './modules/actions';
+import MessageSender from './components/MessageSender';
 
 
 class App extends Component {
@@ -46,7 +47,7 @@ class App extends Component {
                 finished && (
                   <div>
                     <p>finished!</p>
-                    <p>Got user {result.id}</p>
+                    <MessageSender to={result} />
                   </div>
                 )
               }
