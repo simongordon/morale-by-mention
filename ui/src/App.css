@@ -1,0 +1,12 @@
+body div#root {
+  height: 100%;
+  background-color: lightgray;
+}
+
+body .grid {
+  height: 100%;
+}
+
+.column {
+  max-width: 450px;
+}
