@@ -14,16 +14,12 @@ const RandomUserGetter = (props) =>
     render={({ isSubmitting }) =>
       <Form>
         <div className="field">
-          {
-            isSubmitting && <p>Here's your spiner, Elliott!</p>
-          }
-          <button type="submit" className="ui fluid large teal submit button"
+          <button type="submit" className={`ui fluid large teal submit button ${isSubmitting ? 'loading' : ''}`}
             disabled={isSubmitting}>Spin</button>
         </div>
       </Form>
     }
   />
-
 
 
 export default RandomUserGetter;

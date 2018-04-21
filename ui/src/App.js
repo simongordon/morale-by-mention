@@ -28,22 +28,33 @@ class App extends Component {
     return (
       <div className="ui middle aligned center aligned grid">
         <div className="column">
-          <h1 className="ui header">Compliment spinner thingo</h1>
-          <div className="ui large form">
+          {
+            this.state.currentStep === step.getRandom && <h1 className="ui header">Morale by Mention</h1>
+          }
+
+          <div className={`ui large form ${this.state.currentStep === step.done ? 'success' : ''}`}>
             <div className="ui stacked segment">
               {
                 this.state.currentStep === step.getRandom && <RandomUserGetter after={(result) => { this.setState({ currentStep: step.prepareMessage, result }); }} />
               }
               {
-                this.state.currentStep === step.prepareMessage && <MessageSender to={this.state.result} after={() => { this.setState({ currentStep: step.done, result: null }); }} />
+                this.state.currentStep === step.prepareMessage && <MessageSender user={this.state.result} after={() => { this.setState({ currentStep: step.done, result: null }); }} />
               }
               {
-                this.state.currentStep === step.done && <div>
-                  <p>Done!</p>
-                  <button onClick={(e) => {
-                    e.preventDefault();
-                    this.setState({currentStep: step.getRandom})
-                  }}>Try again?</button>
+                this.state.currentStep === step.done && <div className="ui success message"
+                >
+                  <div className="header">Your message has been sent!</div>
+                  <p>
+                    <button
+                      className={`ui fluid large submit button`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        this.setState({ currentStep: step.getRandom })
+                      }}
+                    >
+                      Send another?
+                  </button>
+                  </p>
                 </div>
               }
             </div>

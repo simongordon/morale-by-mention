@@ -1,0 +1,5 @@
+.ui.card div.image img {
+  max-height:300px;
+  width: initial;
+  max-width: 100%;
+}
