@@ -15,13 +15,17 @@ const MessageSender = ({ user, ...props }) =>
             }
             return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, setStatus }) => {
             postMessage(user, values.message).then(() => {
                 setSubmitting(false)
                 props.after()
+                setStatus({ state: "Success" });
+            }, err => {
+                setSubmitting(false);
+                setStatus({ state: "Error" });
             })
         }}
-        render={({ errors, isSubmitting }) =>
+        render={({ errors, isSubmitting, status }) =>
             <Form>
                 <h2>Say a nice thing to...</h2>
                 <div className="ui card centered">
@@ -49,9 +53,17 @@ const MessageSender = ({ user, ...props }) =>
                         disabled={isSubmitting}
                     >
                         <i className="heart icon" />
-                        Submit a compliment
+                        Send a positive message
                 </button>
                 </div>
+                {
+                    status && status.state && status.state === "Error" && <div className="ui form error">
+                        <div className="ui error message">
+                            <div className="header">An error has occurred</div>
+                            <p>Please try again later.</p>
+                        </div>
+                    </div>
+                }
             </Form>
         }
     />
