@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { postMessage } from '../modules/actions';
 import './MessageSender.css';
+import ErrorMessage from './ErrorMessage';
 
 const MessageSender = ({ user, ...props }) =>
     <Formik
@@ -57,12 +58,7 @@ const MessageSender = ({ user, ...props }) =>
                 </button>
                 </div>
                 {
-                    status && status.state && status.state === "Error" && <div className="ui form error">
-                        <div className="ui error message">
-                            <div className="header">An error has occurred</div>
-                            <p>Please try again later.</p>
-                        </div>
-                    </div>
+                    status && status.state && status.state === "Error" && <ErrorMessage message="Please try again later." />
                 }
             </Form>
         }

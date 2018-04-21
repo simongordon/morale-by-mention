@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { getRandomUser } from '../modules/actions';
+import ErrorMessage from './ErrorMessage';
 
 const RandomUserGetter = (props) =>
   <Formik
@@ -21,12 +22,7 @@ const RandomUserGetter = (props) =>
             disabled={isSubmitting}>Spin</button>
         </div>
         {
-          status && status.state && status.state === "Error" && <div className="ui form error">
-            <div className="ui error message">
-              <div className="header">An error has occurred</div>
-              <p>Please try again later.</p>
-            </div>
-          </div>
+          status && status.state && status.state === "Error" && <ErrorMessage message="Please try again later." />
         }
       </Form>
     }
