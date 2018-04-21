@@ -29,9 +29,17 @@ app.post('/mention', (req, res) => {
 
 app.get('/users', (req, res) => {
   req.options.uri = `${tanda}/users`;
-  request(req.options).promise()
+  request(req.options)
     .then(users => res.send(users));
 });
 
+app.get('/users/random', (req, res) => {
+  req.options.uri = `${tanda}/users`;
+  request(req.options)
+    .then((users) => {
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+      res.send(randomUser);
+    });
+});
 
 module.exports = app;
