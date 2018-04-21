@@ -23,24 +23,30 @@ const MessageSender = ({ user, ...props }) =>
         }}
         render={({ errors, isSubmitting }) =>
             <Form>
-                <div>
-                    <h2>Say a nice thing to...</h2>
-                        <div className="ui card centered">
-                            {
-                                user.photo && <div className="image">
-                                    <img src={user.photo}/>
-                                </div>
-                            }
-                            <div className="content">
-                                <div className="header">{user.name}</div>
-                            </div>
-                        </div>
-                    <Field name="message" />
+                <h2>Say a nice thing to...</h2>
+                <div className="ui card centered">
                     {
-                        errors.message && <p>({errors.message})</p>
+                        user.photo && <div className="image">
+                            <img src={user.photo} />
+                        </div>
                     }
+                    <div className="content">
+                        <div className="header">{user.name}</div>
+                    </div>
                 </div>
-                <button type="submit" disabled={isSubmitting}>Submit</button>
+                <div className={`field ${errors.message ? 'error' : ''}`}>
+                    <Field name="message" placeholder="Write your message"/>
+                </div>
+                <div className="field">
+                    <button
+                        type="submit"
+                        className={`ui fluid large red submit button ${isSubmitting ? 'loading' : ''}`}
+                        disabled={isSubmitting}
+                    >
+                        <i className="heart icon" />
+                        Submit a compliment
+                </button>
+                </div>
             </Form>
         }
     />
