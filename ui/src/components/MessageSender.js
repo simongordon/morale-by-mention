@@ -3,9 +3,6 @@ import { Formik, Form, Field } from 'formik';
 import { postMessage } from '../modules/actions';
 
 class MessageSender extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -23,6 +20,7 @@ class MessageSender extends React.Component {
                 onSubmit={(values, { setSubmitting }) => {
                     postMessage(this.props.to.id, values.message).then(() => {
                         setSubmitting(false)
+                        this.props.after()
                     })
                 }}
                 render={({ errors, isSubmitting }) =>
