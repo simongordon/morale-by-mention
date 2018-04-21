@@ -23,7 +23,6 @@ app.post('/mention', (req, res) => {
     method: 'POST',
     body: req.body,
   });
-  console.log(req.options);
   request(req.options)
     .then(sms => res.send(sms));
 });

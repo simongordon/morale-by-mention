@@ -1,4 +1,4 @@
-service: mention
+service: getRandomUser
 
 provider:
   name: aws
@@ -10,10 +10,10 @@ provider:
     TANDA_API: ${file(./serverless.env.yml):dev.TANDA_API}
 
 functions:
-  mention:
-    handler: index.mention
+  getRandomUser:
+    handler: handler.getRandomUser
     events:
       - http:
-          path: mention
-          method: post
+          path: users/random
+          method: get
           cors: true

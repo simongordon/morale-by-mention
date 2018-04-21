@@ -1,7 +1,8 @@
 import { getRandom, postMention } from './externalUrls'; 
 
 export const getRandomUser = () => {
-    return fetch(getRandom).then(user => user.json());
+    return fetch(getRandom, { headers: { 'Content-Type': 'application/json' }
+    }).then(user => user.json());
 }
 
 export const postMessage = (user, message) => {
@@ -13,7 +14,7 @@ export const postMessage = (user, message) => {
         method: 'POST', 
         body: JSON.stringify(body),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }
     }).then(message => message.json())
 }
