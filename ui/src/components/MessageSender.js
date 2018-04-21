@@ -32,10 +32,15 @@ const MessageSender = ({ user, ...props }) =>
                     }
                     <div className="content">
                         <div className="header">{user.name}</div>
+                        {
+                            user.departments && <div className="meta">
+                                <span className="date">{user.departments.join(", ")}</span>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div className={`field ${errors.message ? 'error' : ''}`}>
-                    <Field name="message" placeholder="Write your message"/>
+                    <Field name="message" placeholder="Write your message" />
                 </div>
                 <div className="field">
                     <button
