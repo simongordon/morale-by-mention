@@ -7,6 +7,7 @@ export const getRandomUser = () => {
 }
 
 export const postMessage = (userId, message) => {
+    console.log(`Sending message: "${message}" to user ${userId}`)
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve()
