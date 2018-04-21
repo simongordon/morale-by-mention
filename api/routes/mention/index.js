@@ -28,17 +28,19 @@ app.post('/mention', (req, res) => {
     .then(sms => res.send(sms));
 });
 
+const stripPhone = ({phone, normalised_phone, ...rest}) => ({...rest});
+
 app.get('/users', (req, res) => {
   req.options.uri = `${tanda}/users`;
   request(req.options)
-    .then(users => res.send(users));
+    .then(users => res.send(users.map(stripPhone)));
 });
 
 app.get('/users/random', (req, res) => {
   req.options.uri = `${tanda}/users`;
   request(req.options)
     .then((users) => {
-      const randomUser = users[Math.floor(Math.random() * users.length)];
+      const randomUser = stripPhone(users[Math.floor(Math.random() * users.length)]);
       res.send(randomUser);
     });
 });
