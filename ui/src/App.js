@@ -35,7 +35,7 @@ class App extends Component {
                 this.state.currentStep === step.getRandom && <RandomUserGetter after={(result) => { this.setState({ currentStep: step.prepareMessage, result }); }} />
               }
               {
-                this.state.currentStep === step.prepareMessage && <MessageSender to={this.state.result} after={() => { this.setState({ currentStep: step.done, result: null }); }} />
+                this.state.currentStep === step.prepareMessage && <MessageSender user={this.state.result} after={() => { this.setState({ currentStep: step.done, result: null }); }} />
               }
               {
                 this.state.currentStep === step.done && <div>
