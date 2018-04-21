@@ -21,7 +21,10 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "simple-oauth2": "^1.5.2"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
