@@ -5,6 +5,8 @@ import 'semantic-ui-css/components/header.css'
 import 'semantic-ui-css/components/grid.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/segment.css'
+import {getRandomUser} from './modules/actions';
+
 
 class App extends Component {
   constructor(props) {
@@ -18,10 +20,9 @@ class App extends Component {
 
   startSpinning() {
     this.setState({fetching: true, finished: false});
-    console.log("fjwiofe");
-    setTimeout(() => {
-      this.setState({fetching: false, finished: true, result: {id: 4, name: "Bob" }});
-    }, 3000);
+    getRandomUser().then(result => {
+      this.setState({fetching: false, finished: true, result});
+    })
   }
 
   render() {
@@ -38,7 +39,6 @@ class App extends Component {
                 disabled={fetching}
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log("button pushed!");
                   this.startSpinning();
                 }} >Spin</button>
               </div>
