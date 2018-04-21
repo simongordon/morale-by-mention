@@ -1,21 +1,19 @@
-import fetch from 'fetch';
-
 import { getRandom, postMention } from './externalUrls'; 
 
 export const getRandomUser = () => {
-    // return new Promise((resolve) => {
-    //     setTimeout(() => {
-    //         resolve({id: 123, name: "John"})
-    //     }, 1000)
-    // })
-    return fetch.fetchUrl(getRandom).then(user => console.log(user));
+    return fetch(getRandom).then(user => user.json());
 }
 
-export const postMessage = (userId, message) => {
-    console.log(`Sending message: "${message}" to user ${userId}`)
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve()
-        }, 1000)
-    })
+export const postMessage = (user, message) => {
+    const body = {
+        message,
+        user_ids: [user.id],
+    }
+    return fetch(postMention, {
+        method: 'POST', 
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(message => message.json())
 }

@@ -15,7 +15,7 @@ const MessageSender = (props) =>
             return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-            postMessage(props.to.id, values.message).then(() => {
+            postMessage(props.to, values.message).then(() => {
                 setSubmitting(false)
                 props.after()
             })
