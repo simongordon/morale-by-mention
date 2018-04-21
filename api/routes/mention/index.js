@@ -39,8 +39,16 @@ app.get('/users', (req, res) => {
 app.get('/users/random', (req, res) => {
   req.options.uri = `${tanda}/users`;
   request(req.options)
-    .then((users) => {
+    .then(async (users) => {
       const randomUser = stripPhone(users[Math.floor(Math.random() * users.length)]);
+      const departments = await request({...req.options, uri: `${tanda}/departments`});
+      randomUser.departments = randomUser.department_ids.map(dep_id => {
+        const dep_id_match = departments.filter(p => p.id === dep_id);
+        if (dep_id_match && dep_id_match.length) {
+          return dep_id_match[0].name;
+        }
+        return '';
+      })
       res.send(randomUser);
     });
 });
