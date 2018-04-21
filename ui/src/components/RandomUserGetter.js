@@ -6,6 +6,7 @@ const RandomUserGetter = (props) =>
   <Formik
     onSubmit={(_values, { setSubmitting }) => {
       getRandomUser().then((result) => {
+        console.log(result);
         setSubmitting(false);
         props.after(result);
       })
