@@ -5,54 +5,49 @@ import 'semantic-ui-css/components/header.css'
 import 'semantic-ui-css/components/grid.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/segment.css'
-import {getRandomUser} from './modules/actions';
 import MessageSender from './components/MessageSender';
+import RandomUserGetter from './components/RandomUserGetter';
+
+const step = {
+  getRandom: 1,
+  prepareMessage: 2,
+  done: 3,
+}
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fetching: false,
-      finished: false,
+      currentStep: step.getRandom,
       result: null,
     }
   }
 
-  startSpinning() {
-    this.setState({fetching: true, finished: false});
-    getRandomUser().then(result => {
-      this.setState({fetching: false, finished: true, result});
-    })
-  }
-
   render() {
-    const {fetching, finished, result} = this.state;
-
     return (
       <div className="ui middle aligned center aligned grid">
         <div className="column">
           <h1 className="ui header">Compliment spinner thingo</h1>
-          <form className="ui large form">
+          <div className="ui large form">
             <div className="ui stacked segment">
-              <div className="field">
-                <button className="ui fluid large teal submit button"
-                disabled={fetching}
-                onClick={(e) => {
-                  e.preventDefault();
-                  this.startSpinning();
-                }} >Spin</button>
-              </div>
               {
-                finished && (
-                  <div>
-                    <p>finished!</p>
-                    <MessageSender to={result} />
-                  </div>
-                )
+                this.state.currentStep === step.getRandom && <RandomUserGetter after={(result) => { this.setState({ currentStep: step.prepareMessage, result }); }} />
+              }
+              {
+                this.state.currentStep === step.prepareMessage && <MessageSender to={this.state.result} after={() => { this.setState({ currentStep: step.done, result: null }); }} />
+              }
+              {
+                this.state.currentStep === step.done && <div>
+                  <p>Done!</p>
+                  <button onClick={(e) => {
+                    e.preventDefault();
+                    this.setState({currentStep: step.getRandom})
+                  }}>Try again?</button>
+                </div>
               }
             </div>
-          </form>
+          </div>
         </div>
       </div>
     );
