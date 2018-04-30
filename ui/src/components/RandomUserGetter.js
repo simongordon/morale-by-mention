@@ -19,7 +19,7 @@ const RandomUserGetter = (props) =>
       <Form>
         <div className="field">
           <button type="submit" className={`ui fluid large teal submit button ${isSubmitting ? 'loading' : ''}`}
-            disabled={isSubmitting}>Spin</button>
+            disabled={isSubmitting}>spin for morale</button>
         </div>
         {
           status && status.state && status.state === "Error" && <ErrorMessage message="Please try again later." />

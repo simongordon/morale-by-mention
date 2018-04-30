@@ -23,4 +23,3 @@ module.exports.getRandomUser = (event, context, callback) => {
       callback(null, response);
     });
 };
-

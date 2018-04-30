@@ -29,7 +29,7 @@ class App extends Component {
       <div className="ui middle aligned center aligned grid">
         <div className="column">
           {
-            this.state.currentStep === step.getRandom && <h1 className="ui header">Morale by Mention</h1>
+            this.state.currentStep === step.getRandom && <h1 className="ui header">morale by mention</h1>
           }
 
           <div className={`ui large form ${this.state.currentStep === step.done ? 'success' : ''}`}>
@@ -43,7 +43,7 @@ class App extends Component {
               {
                 this.state.currentStep === step.done && <div className="ui success message"
                 >
-                  <div className="header">Your message has been sent!</div>
+                  <div className="header">your morale has been sent!</div>
                   <p>
                     <button
                       className={`ui fluid large submit button`}
